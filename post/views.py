@@ -1,5 +1,11 @@
 from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
 from .models import Post
+from .serializers import PostSerializer
+from authuser.models import User
+from authuser.serializers import MyUserSerializer, MyUserPostSerializer
 
 # Create your views here.
 
@@ -16,7 +22,7 @@ def createPost(request):
 
     postData = {'userId': userId, 'firstName': firstName, 'lastName': lastName, 'location': location, 'description': description}
 
-    postSerializer = MyPostSerializer(data=postData)
+    postSerializer = PostSerializer(data=postData)
     if postSerializer.is_valid():
         postSerializer.save()
     else:

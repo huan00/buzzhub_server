@@ -4,7 +4,7 @@ from authuser.models import User
 from authuser.serializers import MyUserSerializer
 
 
-class PostSeralizer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
   # user = MyUserSerializer()
   
   class Meta:
