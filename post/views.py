@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -11,23 +12,23 @@ from authuser.serializers import MyUserSerializer, MyUserPostSerializer
 
 @api_view(['POST'])
 def createPost(request):
-    print(request.data)
-    userId, description, image = request.data.values()
+    userId = request.data['userId']
     userSerializer = MyUserPostSerializer(User.objects.get(id=userId)).data
-    userImage = userSerializer['image']
-    firstName = userSerializer['firstName']
-    lastName = userSerializer['lastName']
-    location = userSerializer['location']
-    print(userImage)
-
-    postData = {'userId': userId, 'firstName': firstName, 'lastName': lastName, 'location': location, 'description': description}
-
+    postData = {
+        **request.data
+    }
+    print(postData)
     postSerializer = PostSerializer(data=postData)
     if postSerializer.is_valid():
         postSerializer.save()
+        return Response(postSerializer.data)
     else:
-        print('not valid')
+        return Response({"error": "something went wrong"})
 
 
+@api_view(['GET'])
+def getPosts(request):
+    posts = Post.objects.all()
+    serializer = PostSerializer(posts, many=True)
+    return Response(serializer.data)
 
-    return Response(postSerializer.data)

@@ -5,13 +5,12 @@ from authuser.serializers import MyUserSerializer
 
 
 class PostSerializer(serializers.ModelSerializer):
-  # user = MyUserSerializer()
   
   class Meta:
     model = Post
     fields = (
       'userId',
-      'firstname',
+      'firstName',
       'lastName',
       'location',
       'description',
@@ -24,3 +23,7 @@ class PostSerializer(serializers.ModelSerializer):
       post_data = validated__date
       post = Post.objects.create(**post_data)
       return post
+
+# class GetPostSerializer(serializers.ModelSerializer):
+
+#   class Meta:
