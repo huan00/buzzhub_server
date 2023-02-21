@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import UserManager, AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
+import os
 # from django.contrib.postgres.fields import ArrayField
 
 
@@ -30,12 +31,19 @@ class CustomUserManager(UserManager):
     extra_fields.setdefault('is_active', True)
     return self._create_user(email, password, **extra_fields)
 
+
+def upload_path(instance, filename):
+        if instance:
+            return '/'.join(['profile', filename])
+        return None
+
 class User(AbstractBaseUser, PermissionsMixin):
+
   email = models.EmailField(unique=True)
   firstName = models.CharField(max_length=255, blank=True, default='')
   lastName = models.CharField(max_length=255, blank=True,  default='')
   friends = models.JSONField(default=dict, blank=True)
-  picturePath = models.ImageField(upload_to='media/', default='', blank=True)
+  picturePath = models.ImageField(upload_to=upload_path, default='', blank=True)
   location = models.CharField(max_length=255)
   occupation = models.CharField(max_length=255)
   viewedProfile = models.IntegerField(default=0)

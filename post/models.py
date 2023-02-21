@@ -11,8 +11,9 @@ class Post(models.Model):
     location = models.CharField(max_length=255)
     description = models.TextField(max_length=255)
     image = models.ImageField(upload_to='media/', default='')
+    userPicturePath = models.CharField(max_length=255, default='')
     likes = models.JSONField(default=dict, blank=True)
-    comments = ArrayField(models.TextField(), default=list, blank=True)
+    comments = models.JSONField(default=dict, blank=True)
 
     def __str__(self):
         return str(self.id)

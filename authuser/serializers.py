@@ -9,9 +9,9 @@ class MyUserCreateSerializer(serializers.ModelSerializer):
       'lastName',
       'email',
       'password',
-
-  
-
+      'picturePath',
+      'location',
+      'occupation',
     )
   
   def create(self, validated_data):
@@ -45,6 +45,7 @@ class MyUserPostSerializer(serializers.ModelSerializer):
       'firstName',
       'lastName',
       'location',
+      'picturePath'
     )
 
 class MyUserFriendSerializer(serializers.ModelSerializer):
@@ -64,6 +65,17 @@ class MyUserFriendSerializer(serializers.ModelSerializer):
     
     return friendList
   
+class MyFriendListSerializer(serializers.ModelSerializer):
+  class Meta: 
+    model = User
+    fields = (
+      'firstName',
+      'lastName',
+      'location',
+      'picturePath',
+      'id',
+      'occupation'
+    )
 
 # class MyPostSerializer(serializers.ModelSerializer):
 #   # userId = MyUserSerializer()

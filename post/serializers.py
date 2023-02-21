@@ -5,10 +5,11 @@ from authuser.serializers import MyUserSerializer
 
 
 class PostSerializer(serializers.ModelSerializer):
-  
+
   class Meta:
     model = Post
     fields = (
+      'id',
       'userId',
       'firstName',
       'lastName',
@@ -17,6 +18,7 @@ class PostSerializer(serializers.ModelSerializer):
       'image',
       'likes',
       'comments',
+      'userPicturePath'
     )
 
     def create(self, validated__date):
