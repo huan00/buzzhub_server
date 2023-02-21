@@ -126,10 +126,11 @@ WSGI_APPLICATION = 'buzzhub.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'buzzhub',
-        'USER': 'super',
-        'PASSWORD': 'super',
-        'HOST': 'localhost',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'STrKYJaxAV1UVfrpBbOF',
+        'HOST': 'containers-us-west-35.railway.app',
+        'PORT': '6267'
     }
 }
 
