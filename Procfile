@@ -1,1 +1,1 @@
-web: gunicorn buzzhub.wsgi --log-file
+web: gunicorn buzzhub.wsgi --log-file -
