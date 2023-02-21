@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-j(4+36sro#k*!(=o7#_uo_i$qe$6ey()b@)yrlfmtc8-1l9sr4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "buzzhubserver-production.up.railway.app"]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
