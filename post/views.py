@@ -19,35 +19,36 @@ def createPost(request, format=None):
     userId = request.data['userId']
     description = request.data['description']
     image = request.data['image']
+    video = request.data['video']
 
     userSerializer = MyUserPostSerializer(User.objects.get(id=userId)).data
-
     
     postData = {
-        'userId': userId, 
+        'userId': User(id=userSerializer['id']), 
         'firstName': userSerializer['firstName'], 
         'lastName': userSerializer['lastName'], 
         'location': userSerializer['location'], 
         'image': image, 
+        'video': video ,
         'description': description, 
         'userPicturePath': userSerializer['picturePath']
         }
 
-    postSerializer = PostSerializer(data=postData)
-    if postSerializer.is_valid():
-        postSerializer.save()
+    post = PostSerializer().create(postData)
+
+    if post is not None:
         posts = Post.objects.all().order_by('-id')
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
-        return Response({"error": "something went wrong"})
+        return Response({"error": "something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
 def getPosts(request):
     posts = Post.objects.all().order_by('-id')
     serializer = PostSerializer(posts, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 

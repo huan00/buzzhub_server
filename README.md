@@ -5,7 +5,7 @@
 ### Features:
 
 - User Auth
-- create post with image
+- create post with image, gif and video
 - like post
 - comment on post
 - add/remove friendlist
@@ -30,5 +30,4 @@
 
 #### Coming soon features:
 
-- Post with Gif, other attachments and voice
 - Edit networking tabs
